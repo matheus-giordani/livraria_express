@@ -9,6 +9,7 @@ class AutorController {
       res.status(500).send(error.message);
     }
   };
+  
 
   static listarAutorPorId = async (req, res) => {
     const id = req.params.id;
@@ -17,7 +18,7 @@ class AutorController {
       const autor = await Autores.findById(id).exec();
       res.status(200).json(autor);
     } catch (error) {
-      res.status(500).send(`${error.message} - Id do autor não localizado.`);
+      res.status(500).send(`${error.message} - Id do autor não localizado!`);
     }
   };
 
@@ -38,7 +39,7 @@ class AutorController {
 
     try {
       await Autores.findByIdAndUpdate(id, { $set: req.body });
-      res.status(200).send({ message: "autor atualizado com sucesso" });
+      res.status(200).send({ message: "autor atualizado com sucesso!" });
     } catch (error) {
       res.status(500).send({ message: error.message });
     }
@@ -47,7 +48,6 @@ class AutorController {
   static excluirAutor = async (req, res) => {
     const id = req.params.id;
 
-    
     try {
       await Autores.findByIdAndRemove(id);
       res.status(200).send({ message: "autor removido com sucesso" });
